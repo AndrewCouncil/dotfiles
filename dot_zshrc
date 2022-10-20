@@ -218,8 +218,8 @@ if [[ $- == *i* ]]; then
 	alias fgrep='fgrep --color=auto'
 
 	# botbuilt ssk keys, need to add hostname and url
-	alias armbblt="ssh -i '~/drew-botbuilt-access-key.pem'"#ubuntu@ec2-34-228-140-52.compute-1.amazonaws.com"
-	alias x86bblt="ssh -i '~/drew-botbuilt-access-key.pem'"#ubuntu@ec2-3-88-200-3.compute-1.amazonaws.com"
+	alias armbblt="ssh -i '~/work/drew-arm-builder-key.pem'"
+	alias x86bblt="ssh -i '~/work/drew-x86-builder-key.pem'"
 else
 	exaoff
 fi
@@ -233,6 +233,9 @@ fi
 export EDITOR='nvim'
 
 # Configuration for botbuilt volume_dev folder
-export VOLUME_DEV_PATH="~/work/volume_dev"
+export VOLUME_DEV_PATH="/home/drew/work/volume_dev"
+
+# Configure PATH
+export PATH="${HOME}/.local/bin:$PATH"
 
 eval "$(starship init zsh)"
