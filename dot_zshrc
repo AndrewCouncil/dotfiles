@@ -156,21 +156,29 @@ if [[ $- == *i* ]]; then
 
 	# package manager aliases
 	if [ -f /etc/fedora-release ]; then
-		alias install="sudo dnf install"
-		alias remove="sudo dnf remove"
-		alias update="sudo dnf check-update"
-		alias upgrade="sudo dnf upgrade"
-		alias autoremove="sudo dnf autoremove"
-		alias packageinfo="sudo dnf info"
-		alias packagesearch="sudo dnf search"
+		alias pkgi="sudo dnf install"
+		alias pkgr="sudo dnf remove"
+		alias pkgup="sudo dnf check-update"
+		alias pkgu="sudo dnf upgrade"
+		alias pkgar="sudo dnf autoremove"
+		alias pkgi="sudo dnf info"
+		alias pkgs="sudo dnf search"
 	elif [ -f /etc/debian-relsease ]; then
-		alias install="sudo apt install"
-		alias remove="sudo apt remove"
-		alias update="sudo apt update"
-		alias upgrade="sudo apt upgrade"
-		alias autoremove="sudo apt autoremove"
-		alias packageinfo="sudo apt show"
-		alias packagesearch="sudo apt search"
+		alias pkgi="sudo apt install"
+		alias pkgr="sudo apt remove"
+		alias pkgup="sudo apt update"
+		alias pkgu="sudo apt upgrade"
+		alias pkgar="sudo apt autoremove"
+		alias pkgi="sudo apt show"
+		alias pkgs="sudo apt search"
+	elif [ -f /etc/arch-release ]; then
+		alias pkgi="sudo pacman -S"
+		alias pkgr="sudo apt remove"
+		alias pkgup="sudo echo don't do this on arch"
+		alias pkgu="sudo pacman -Syu"
+		alias pkgar="sudo pacman -Rs"
+		alias pkgi="sudo pacman -Qi"
+		alias pkgs="sudo pacman -Ss"
 	fi
 
 	# git aliases
@@ -208,6 +216,12 @@ if [[ $- == *i* ]]; then
 	alias svim="sudo nvim"
 	alias svi="sudo nvim"
 
+	# lazygit
+	alias lg="lazygit"
+
+	# ranger that exits to directory found
+	alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
+
 	# NordVPN connections
 	alias vpnc="nordvpn connect"
 	alias vpnd="nordvpn disconnect"
@@ -231,6 +245,9 @@ fi
 #   export EDITOR='nvim'
 # fi
 export EDITOR='nvim'
+
+# Make ranger load my config file
+export RANGER_LOAD_DEFAULT_RC=FALSE
 
 # Configuration for botbuilt volume_dev folder
 export VOLUME_DEV_PATH="/home/drew/work/volume_dev"
