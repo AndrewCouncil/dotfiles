@@ -152,7 +152,7 @@ if [[ $- == *i* ]]; then
 	alias pcd="cd $HOME/pCloudDrive/"
 
 	# cd to home directory
-	alias home="cd $HOME"
+	alias ~~="cd $HOME"
 
 	# package manager aliases
 	if [ -f /etc/fedora-release ]; then
