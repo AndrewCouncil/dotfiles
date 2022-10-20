@@ -1,0 +1,12 @@
+right_format = """$username$time"""
+
+[shell]
+disabled=false
+bash_indicator=""
+zsh_indicator=""
+format="[$indicator]($style)"
+
+[time]
+disabled = false
+format = '[\[$time\]]($style)'
+time_format = "%l:%M:%S"

@@ -1,0 +1,238 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=* r:|=*'
+zstyle :compinstall filename '/home/drew/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=5000
+SAVEHIST=5000
+unsetopt beep
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+source $HOME/.config/zsh/ohmyzsh-plugins/plugins/colored-man-pages/colored-man-pages.plugin.zsh
+source $HOME/.config/zsh/ohmyzsh-plugins/plugins/command-not-found/command-not-found.plugin.zsh
+source $HOME/.config/zsh/ohmyzsh-plugins/plugins/dirhistory/dirhistory.plugin.zsh
+source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source $HOME/.config/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
+# functions
+function copypath {
+  # If no argument passed, use current directory
+  local file="${1:-.}"
+
+  # If argument is not an absolute path, prepend $PWD
+  [[ $file = /* ]] || file="$PWD/$file"
+
+  # Copy the absolute path without resolving symlinks
+  # If clipcopy fails, exit the function with an error
+  print -n "${file:a}" | xclip -selection clipboard || return 1
+
+  echo ${(%):-"%B${file:a}%b copied to clipboard."}
+}
+
+function copyfile {
+ [[ "$#" != 1 ]] && return 1
+  local file_to_copy=$1
+  cat $file_to_copy | xclip -selection clipboard || return 1
+}
+
+# copy the active line from the command line buffer 
+# onto the system clipboard
+
+copybuffer () {
+  printf "%s" "$BUFFER" | xclip -selection clipboard || return 1
+}
+
+zle -N copybuffer
+
+bindkey -M emacs "^O" copybuffer
+bindkey -M viins "^O" copybuffer
+bindkey -M vicmd "^O" copybuffer
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+
+function extract {
+ if [ -z "$1" ]; then
+    # display usage if no parameters given
+    echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    echo "       extract <path/file_name_1.ext> [path/file_name_2.ext] [path/file_name_3.ext]"
+ else
+    for n in "$@"
+    do
+      if [ -f "$n" ] ; then
+          case "${n%,}" in
+            *.cbt|*.tar.bz2|*.tar.gz|*.tar.xz|*.tbz2|*.tgz|*.txz|*.tar)
+                         tar xvf "$n"       ;;
+            *.lzma)      unlzma ./"$n"      ;;
+            *.bz2)       bunzip2 ./"$n"     ;;
+            *.cbr|*.rar)       unrar x -ad ./"$n" ;;
+            *.gz)        gunzip ./"$n"      ;;
+            *.cbz|*.epub|*.zip)       unzip ./"$n"       ;;
+            *.z)         uncompress ./"$n"  ;;
+            *.7z|*.arj|*.cab|*.cb7|*.chm|*.deb|*.dmg|*.iso|*.lzh|*.msi|*.pkg|*.rpm|*.udf|*.wim|*.xar)
+                         7z x ./"$n"        ;;
+            *.xz)        unxz ./"$n"        ;;
+            *.exe)       cabextract ./"$n"  ;;
+            *.cpio)      cpio -id < ./"$n"  ;;
+            *.cba|*.ace)      unace x ./"$n"      ;;
+            *)
+                         echo "extract: '$n' - unknown archive method"
+                         return 1
+                         ;;
+          esac
+      else
+          echo "'$n' - file does not exist"
+          return 1
+      fi
+    done
+fi
+}
+
+IFS=$SAVEIFS
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
+# fungit clone --recurse-submodules "$@" && cd "$(basename $_ .git)"ctions to enable or disable exa to ls aliases
+function exaon {
+    unalias ls > /dev/null 2>&1
+    unalias la > /dev/null 2>&1
+    unalias ll > /dev/null 2>&1
+    unalias lt > /dev/null 2>&1
+    alias ls="exa --color=always --group-directories-first --icons"
+	alias la="exa -a --color=always --group-directories-first --icons"
+	alias ll="exa -al --color=always --group-directories-first --icons"
+	alias lt="exa -aT --color=always --group-directories-first --icons"
+}
+function exaoff {
+    unalias ls > /dev/null 2>&1
+    unalias la > /dev/null 2>&1
+    unalias ll > /dev/null 2>&1
+    unalias lt > /dev/null 2>&1
+    alias la="ls -a"
+    alias ll="ls -al"
+}
+
+# function to create a new directory and cd into it
+newdir() {
+	mkdir -p -- "$1" && cd -P -- "$1"
+}
+
+# ALIASES (only in interactive shells)
+if [[ $- == *i* ]]; then
+    exaon
+    # pipe into this to copy to clipboard
+    alias clip="xclip -selection clipboard"
+
+    # formating operations to remove caps and spaces
+	alias formdirs="find . -maxdepth 1 -type d | prename 'y/ /_/ | y/A-Z/a-z/' -i"
+	alias formfiles="find . -maxdepth 1 -type f | prename 'y/ /_/ | y/A-Z/a-z/' -i"
+	alias formall="find . -maxdepth 1 | prename 'y/ /_/ | y/A-Z/a-z/' -i"
+    # formatting operations to remove spaces
+	alias usdirs="find . -maxdepth 1 -type d | prename 'y/ /_/' -i"
+	alias usfiles="find . -maxdepth 1 -type f | prename 'y/ /_/' -i"
+	alias usall="find . -maxdepth 1 | prename 'y/ /_/' -i"
+
+	# cd into pCloudDrive
+	alias pcd="cd $HOME/pCloudDrive/"
+
+	# cd to home directory
+	alias home="cd $HOME"
+
+	# package manager aliases
+	if [ -f /etc/fedora-release ]; then
+		alias install="sudo dnf install"
+		alias remove="sudo dnf remove"
+		alias update="sudo dnf check-update"
+		alias upgrade="sudo dnf upgrade"
+		alias autoremove="sudo dnf autoremove"
+		alias packageinfo="sudo dnf info"
+		alias packagesearch="sudo dnf search"
+	elif [ -f /etc/debian-relsease ]; then
+		alias install="sudo apt install"
+		alias remove="sudo apt remove"
+		alias update="sudo apt update"
+		alias upgrade="sudo apt upgrade"
+		alias autoremove="sudo apt autoremove"
+		alias packageinfo="sudo apt show"
+		alias packagesearch="sudo apt search"
+	fi
+
+	# git aliases
+	alias g="git"
+	alias gcl="git clone --recurse-submodules"
+	alias gccd="git clone --recurse-submodules '$@' && cd '$(basename $_ .git)'"
+	alias gs="git status"
+	alias ga="git add"
+	alias gcm="git commit -m"
+	alias gcl="git clone"
+	alias gpl="git pull"
+	alias gps="git push"
+	alias gco="git checkout"
+	alias gbr="git branch"
+	alias gf="git fetch"
+	alias gd="git diff"
+	alias gcf="git config --list"
+
+	# docker aliases
+	alias d="docker"
+	alias dp="docker ps"
+	alias di="docker images"
+	alias dpl="docker pull"
+	alias db="docker build"
+	alias dpr="docker system prune"
+	alias dpra="docker system prune -a"
+
+	# launch vs code with wayland
+	alias code="code --enable-features=UseOzonePlatform --ozone-platform=wayland --unity-launch"
+	alias vsc="code ."
+
+	# force neovim
+	alias vim="nvim"
+	alias vi="nvim"
+	alias svim="sudo nvim"
+	alias svi="sudo nvim"
+
+	# NordVPN connections
+	alias vpnc="nordvpn connect"
+	alias vpnd="nordvpn disconnect"
+
+	# Colorize grep output
+	alias grep='grep --color=auto'
+	alias egrep='egrep --color=auto'
+	alias fgrep='fgrep --color=auto'
+
+	# botbuilt ssk keys, need to add hostname and url
+	alias armbblt="ssh -i '~/drew-botbuilt-access-key.pem'"#ubuntu@ec2-34-228-140-52.compute-1.amazonaws.com"
+	alias x86bblt="ssh -i '~/drew-botbuilt-access-key.pem'"#ubuntu@ec2-3-88-200-3.compute-1.amazonaws.com"
+else
+	exaoff
+fi
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='nvim'
+# fi
+export EDITOR='nvim'
+
+# Configuration for botbuilt volume_dev folder
+export VOLUME_DEV_PATH="~/work/volume_dev"
+
+eval "$(starship init zsh)"
