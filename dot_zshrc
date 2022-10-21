@@ -158,7 +158,7 @@ if [[ $- == *i* ]]; then
 	if [ -f /etc/fedora-release ]; then
 		alias pkgi="sudo dnf install"
 		alias pkgr="sudo dnf remove"
-		alias pkgup="sudo dnf check-update"
+		alias pkgud="sudo dnf check-update"
 		alias pkgu="sudo dnf upgrade"
 		alias pkgar="sudo dnf autoremove"
 		alias pkgi="sudo dnf info"
@@ -166,7 +166,7 @@ if [[ $- == *i* ]]; then
 	elif [ -f /etc/debian-relsease ]; then
 		alias pkgi="sudo apt install"
 		alias pkgr="sudo apt remove"
-		alias pkgup="sudo apt update"
+		alias pkgud="sudo apt update"
 		alias pkgu="sudo apt upgrade"
 		alias pkgar="sudo apt autoremove"
 		alias pkgi="sudo apt show"
@@ -174,7 +174,7 @@ if [[ $- == *i* ]]; then
 	elif [ -f /etc/arch-release ]; then
 		alias pkgi="sudo pacman -S"
 		alias pkgr="sudo apt remove"
-		alias pkgup="sudo echo don't do this on arch"
+		alias pkgud="sudo echo don't do this on arch"
 		alias pkgu="sudo pacman -Syu"
 		alias pkgar="sudo pacman -Rs"
 		alias pkgi="sudo pacman -Qi"
