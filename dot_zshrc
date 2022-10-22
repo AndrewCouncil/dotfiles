@@ -161,7 +161,7 @@ if [[ $- == *i* ]]; then
 		alias pkgud="sudo dnf check-update"
 		alias pkgu="sudo dnf upgrade"
 		alias pkgar="sudo dnf autoremove"
-		alias pkgi="sudo dnf info"
+		alias pkgin="sudo dnf info"
 		alias pkgs="sudo dnf search"
 	elif [ -f /etc/debian-relsease ]; then
 		alias pkgi="sudo apt install"
@@ -169,7 +169,7 @@ if [[ $- == *i* ]]; then
 		alias pkgud="sudo apt update"
 		alias pkgu="sudo apt upgrade"
 		alias pkgar="sudo apt autoremove"
-		alias pkgi="sudo apt show"
+		alias pkgin="sudo apt show"
 		alias pkgs="sudo apt search"
 	elif [ -f /etc/arch-release ]; then
 		alias pkgi="sudo pacman -S"
@@ -177,7 +177,7 @@ if [[ $- == *i* ]]; then
 		alias pkgud="sudo echo don't do this on arch"
 		alias pkgu="sudo pacman -Syu"
 		alias pkgar="sudo pacman -Rs"
-		alias pkgi="sudo pacman -Qi"
+		alias pkgin="sudo pacman -Qi"
 		alias pkgs="sudo pacman -Ss"
 	fi
 
