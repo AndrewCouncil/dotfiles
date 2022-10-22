@@ -18,6 +18,13 @@ bindkey -v
 source $HOME/.config/zsh/ohmyzsh-plugins/plugins/colored-man-pages/colored-man-pages.plugin.zsh
 source $HOME/.config/zsh/ohmyzsh-plugins/plugins/command-not-found/command-not-found.plugin.zsh
 source $HOME/.config/zsh/ohmyzsh-plugins/plugins/dirhistory/dirhistory.plugin.zsh
+source $HOME/.config/zsh/ohmyzsh-plugins/plugins/sudo/sudo.plugin.zsh
+
+# Set ALT+s to the sudo-command-line shortcut
+bindkey -M emacs '^[s' sudo-command-line
+bindkey -M vicmd '^[s' sudo-command-line
+bindkey -M viins '^[s' sudo-command-line
+
 source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 source $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
 source $HOME/.config/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
