@@ -151,9 +151,6 @@ if [[ $- == *i* ]]; then
 	# cd into pCloudDrive
 	alias pcd="cd $HOME/pCloudDrive/"
 
-	# cd to home directory
-	alias ~~="cd $HOME"
-
 	# package manager aliases
 	if [ -f /etc/fedora-release ]; then
 		alias pkgi="sudo dnf install"
