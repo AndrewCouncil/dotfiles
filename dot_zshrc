@@ -26,7 +26,8 @@ bindkey -M vicmd '^[s' sudo-command-line
 bindkey -M viins '^[s' sudo-command-line
 
 source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+# source $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
+source $HOME/.config/zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source $HOME/.config/zsh/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # functions
@@ -124,7 +125,7 @@ function exaon {
     alias ls="exa --color=always --group-directories-first --icons"
 	alias la="exa -a --color=always --group-directories-first --icons"
 	alias ll="exa -al --color=always --group-directories-first --icons"
-	alias lt="exa -aT --color=always --group-directories-first --icons"
+	alias lt="exa -T --color=always --group-directories-first --icons"
 }
 function exaoff {
     unalias ls > /dev/null 2>&1
@@ -263,4 +264,5 @@ export VOLUME_DEV_PATH="/home/drew/work/volume_dev"
 # Configure PATH
 export PATH="${HOME}/.local/bin:$PATH"
 
+eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
