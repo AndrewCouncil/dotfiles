@@ -157,11 +157,11 @@ if [[ $- == *i* ]]; then
 	alias usall="find . -maxdepth 1 | prename 'y/ /_/' -i"
 
 	# cd into pCloudDrive
-	alias pcd="cd $HOME/pCloudDrive/"
-    alias ece350="cd /home/drew/pCloudDrive/school/junior_fall/ECE_350"
-    alias ece270="cd /home/drew/pCloudDrive/school/junior_fall/ECE_270"
-    alias cs310="cd /home/drew/pCloudDrive/school/junior_fall/CS_310"
-    alias productdesign="/home/drew/pCloudDrive/school/junior_fall/product_design"
+	alias pcd="z $HOME/pCloudDrive/"
+    alias ece350="z /home/drew/pCloudDrive/school/junior_fall/ECE_350"
+    alias ece270="z /home/drew/pCloudDrive/school/junior_fall/ECE_270"
+    alias cs310="z /home/drew/pCloudDrive/school/junior_fall/CS_310"
+    alias productdesign="z /home/drew/pCloudDrive/school/junior_fall/product_design"
 
 	# package manager aliases
 	if [ -f /etc/fedora-release ]; then
