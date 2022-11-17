@@ -1,0 +1,7 @@
+
+[user]
+email = drew@botbuilt.com
+name = DrewCouncil
+ 
+[core]
+sshCommand = "ssh -i ~/.ssh/id_ed25519_bitbucket"

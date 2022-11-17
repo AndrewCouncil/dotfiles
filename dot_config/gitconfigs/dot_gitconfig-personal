@@ -1,0 +1,10 @@
+
+[user]
+email = andrew.p.council@gmail.com
+name = AndrewCouncil
+ 
+[github]
+user = "Drew Council"
+ 
+[core]
+sshCommand = "ssh -i ~/.ssh/id_ed25519_github"

@@ -1,0 +1,7 @@
+
+[user]
+email = apc41@duke.edu
+name = apc41
+ 
+[core]
+sshCommand = "ssh -i ~/.ssh/id_ed25519_gitlab"

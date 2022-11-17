@@ -1,0 +1,22 @@
+
+[includeIf "gitdir:~/work/"]
+	path = ~/.config/gitconfigs/.gitconfig-work
+
+[includeIf "gitdir:~/school/"]
+	path = ~/.config/gitconfigs/.gitconfig-school
+
+[includeIf "gitdir:~/personal/"]
+	path = ~/.config/gitconfigs/.gitconfig-personal
+
+[includeIf "gitdir:~/pCloudDrive/personal/"]
+	path = ~/.config/gitconfigs/.gitconfig-personal
+
+[includeIf "gitdir:~/pCloudDrive/school/"]
+	path = ~/.config/gitconfigs/.gitconfig-school
+
+[init]
+    defaultBranch = master
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore
