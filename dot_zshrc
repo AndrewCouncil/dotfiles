@@ -222,8 +222,8 @@ if [[ $- == *i* ]]; then
 	# force neovim
 	alias vim="nvim"
 	alias vi="nvim"
-	alias svim="sudo nvim"
-	alias svi="sudo nvim"
+	alias svim="sudoedit"
+	alias svi="sudoedit"
 
 	# lazygit
 	alias lg="lazygit"
